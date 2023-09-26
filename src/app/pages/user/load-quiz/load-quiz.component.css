@@ -1,0 +1,16 @@
+.truncate{
+    display: block;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://st2.depositphotos.com/1032749/7119/v/450/depositphotos_71194851-stock-illustration-quiz-speech-bubble-icon.jpg');
+    background-size: cover;
+  }

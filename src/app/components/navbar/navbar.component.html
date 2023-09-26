@@ -1,0 +1,54 @@
+<mat-toolbar color="primary">
+  <button
+    routerLink="/"
+    mat-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    QuizApp
+    <mat-icon>menu_book</mat-icon>
+  </button>
+  <span></span>
+  <span class="example-spacer"></span>
+
+  <button
+    *ngIf="isLoggedIn"
+    routerLink="login"
+    (click)="logout()"
+    mat-button
+    class="example-icon favorite-icon"
+    aria-label="Example icon-button with heart icon"
+  >
+    Logout
+    <mat-icon>logout</mat-icon>
+  </button>
+  <button
+    *ngIf="!isLoggedIn"
+    routerLink="login"
+    mat-button
+    class="example-icon favorite-icon"
+    aria-label="Example icon-button with heart icon"
+  >
+    Login
+    <mat-icon>login</mat-icon>
+  </button>
+  <button
+    *ngIf="!isLoggedIn"
+    routerLink="signup"
+    mat-button
+    class="example-icon"
+    aria-label="Example icon-button with share icon"
+  >
+    Register
+    <mat-icon>app_registration</mat-icon>
+  </button>
+  <button
+    *ngIf="isLoggedIn && user"
+    mat-button
+    class="example-icon favorite-icon"
+    aria-label="Example icon-button with heart icon"
+  >
+    {{ user.userName }}
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</mat-toolbar>

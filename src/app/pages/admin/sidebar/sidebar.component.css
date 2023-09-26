@@ -1,0 +1,7 @@
+.mdc-list-item.mdc-list-item--with-one-line .mdc-list-item__start {
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  .mat-mdc-list-item-icon {
+    color: rgba(0, 0, 0, 0.54);
+  }
