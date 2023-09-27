@@ -16,6 +16,8 @@ export class QuizStartComponent implements OnInit {
   attempted: any = 0;
   isSubmit: boolean = false;
 
+  timer: any = undefined;
+
   constructor(
     private locationStrategy: LocationStrategy,
     private route: ActivatedRoute,
@@ -30,9 +32,11 @@ export class QuizStartComponent implements OnInit {
         .getQustionsOfQuizForTest(this.qid)
         .subscribe((data) => {
           this.questions = data;
+          this.timer = this.questions.length * 1 * 60;
           this.questions.forEach((q: any) => {
             q['givenAnswer'] = '';
           });
+          this.startTimer();
           console.log(data);
         });
     });
@@ -48,18 +52,33 @@ export class QuizStartComponent implements OnInit {
   submitQuiz() {
     let conf = confirm('Want to submit?');
     if (conf) {
-      this.isSubmit = true;
-      this.questions.forEach((q: any) => {
-        if (q.givenAnswer == q.answer) {
-          this.correctAnswers++;
-          this.marksGot =
-            this.marksGot +
-            this.questions[0].quiz.maxMarks / this.questions.length;
-        }
-        if (q.givenAnswer.trim() != '') {
-          this.attempted++;
-        }
-      });
+      this.evalQuiz();
     }
+  }
+
+  evalQuiz() {
+    this.isSubmit = true;
+    this.questions.forEach((q: any) => {
+      if (q.givenAnswer == q.answer) {
+        this.correctAnswers++;
+        this.marksGot =
+          this.marksGot +
+          this.questions[0].quiz.maxMarks / this.questions.length;
+      }
+      if (q.givenAnswer.trim() != '') {
+        this.attempted++;
+      }
+    });
+  }
+
+  startTimer() {
+    let t = window.setInterval(() => {
+      if (this.timer <= 0) {
+        this.evalQuiz();
+        clearInterval(t);
+      } else {
+        this.timer--;
+      }
+    }, 1000);
   }
 }

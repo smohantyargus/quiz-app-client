@@ -8,7 +8,7 @@
             <h2>On going quiz on {{ questions[0].quiz.title }}</h2>
           </mat-card-content></mat-card
         >
-        {{ questions | json }}
+        <!-- {{ questions | json }} -->
         <ng-container *ngIf="questions">
           <mat-card *ngFor="let q of questions; let i = index" class="mt20">
             <mat-card-content>
@@ -68,7 +68,37 @@
           </button>
         </div>
       </div>
-      <div class="col-md-2"></div>
+      <div class="col-md-2">
+        <mat-card class="dflex-cen">
+          <mat-card-title>Time Left</mat-card-title>
+          <mat-card-subtitle
+            ><h1
+              [ngStyle]="{
+                color:
+                  (timer / (questions.length * 1 * 60)) * 100 > 20
+                    ? 'gray'
+                    : 'red'
+              }"
+              [ngClass]="
+                (timer / (questions.length * 1 * 60)) * 100 > 20 ? '' : 'blink'
+              "
+            >
+              {{ timer * 1000 | date : "H:mm:ss" : "UTC" }}
+            </h1></mat-card-subtitle
+          >
+          <mat-card-content style="margin: auto">
+            <mat-spinner
+              mode="determinate"
+              [value]="(timer / (questions.length * 1 * 60)) * 100"
+              [color]="
+                (timer / (questions.length * 1 * 60)) * 100 > 20
+                  ? 'primary'
+                  : 'accent'
+              "
+            ></mat-spinner>
+          </mat-card-content>
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>
