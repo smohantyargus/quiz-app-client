@@ -45,6 +45,7 @@ import { LoadQuizComponent } from './pages/user/load-quiz/load-quiz.component';
 import { InstructionsComponent } from './pages/user/instructions/instructions.component';
 import { QuizStartComponent } from './pages/user/quiz-start/quiz-start.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatSlideToggleModule,
     MatSelectModule,
     MatRadioModule,
+    MatProgressSpinnerModule,
   ],
   providers: [authInterceptorProvidors],
   bootstrap: [AppComponent],

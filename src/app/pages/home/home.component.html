@@ -3,6 +3,16 @@
     <div class="row mt20">
       <div class="col-md-6 offset-md-3 text-center">
         <h1>Welcome to QuizApp</h1>
+        <div *ngIf="isAdmin">
+          <button mat-raised-button color="primary" routerLink="/admin">
+            Go To Admin View
+          </button>
+        </div>
+        <div *ngIf="!isAdmin">
+          <button mat-raised-button color="primary" routerLink="/user/0">
+            Go To User
+          </button>
+        </div>
       </div>
     </div>
   </div>
