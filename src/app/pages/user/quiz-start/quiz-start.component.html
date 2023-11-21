@@ -8,52 +8,38 @@
             <h2>On going quiz on {{ questions[0].quiz.title }}</h2>
           </mat-card-content></mat-card
         >
-        <!-- {{ questions | json }} -->
+        <!-- {{ questions[0] | json }} -->
         <ng-container *ngIf="questions">
           <mat-card *ngFor="let q of questions; let i = index" class="mt20">
             <mat-card-content>
               <p>Q {{ i + 1 }}) <span [innerHTML]="q.content"></span></p>
-              <mat-divider></mat-divider>
-              <div class="row mt20">
-                <div class="col-md-6">
-                  <input
-                    type="radio"
-                    [value]="q.option1"
-                    [name]="i.toString()"
-                    [(ngModel)]="q.givenAnswer"
-                  />{{ q.option1 }}
+              <mat-radio-group [(ngModel)]="q.givenAnswer">
+                <mat-divider></mat-divider>
+                <div class="row mt20">
+                  <div class="col-md-6">
+                    <mat-radio-button [value]="q.option1" color="primary">{{
+                      q.option1
+                    }}</mat-radio-button>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-radio-button [value]="q.option2" color="primary">{{
+                      q.option2
+                    }}</mat-radio-button>
+                  </div>
                 </div>
-                <div class="col-md-6">
-                  <input
-                    type="radio"
-                    [value]="q.option2"
-                    [name]="i.toString()"
-                    [(ngModel)]="q.givenAnswer"
-                  />{{ q.option2 }}
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-radio-button [value]="q.option3" color="primary">{{
+                      q.option3
+                    }}</mat-radio-button>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-radio-button [value]="q.option4" color="primary">{{
+                      q.option4
+                    }}</mat-radio-button>
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <input
-                    type="radio"
-                    [value]="q.option3"
-                    [name]="i.toString()"
-                    [(ngModel)]="q.givenAnswer"
-                  />{{ q.option3 }}
-                </div>
-                <div class="col-md-6">
-                  <input
-                    type="radio"
-                    [value]="q.option4"
-                    [name]="i.toString()"
-                    [(ngModel)]="q.givenAnswer"
-                  />{{ q.option4 }}
-                </div>
-              </div>
-              <!-- <mat-radio-group aria-label="Select an option">
-                <mat-radio-button value="1">Option 1</mat-radio-button>
-                <mat-radio-button value="2">Option 2</mat-radio-button>
-              </mat-radio-group> -->
+              </mat-radio-group>
             </mat-card-content>
           </mat-card>
         </ng-container>
@@ -70,17 +56,19 @@
       </div>
       <div class="col-md-2">
         <mat-card class="dflex-cen">
-          <mat-card-title>Time Left</mat-card-title>
+          <mat-card-title class="mt10">Time Left</mat-card-title>
           <mat-card-subtitle
             ><h1
               [ngStyle]="{
                 color:
-                  (timer / (questions.length * 1 * 60)) * 100 > 20
+                  (timer / (questions.length * 0.5 * 60)) * 100 > 20
                     ? 'gray'
                     : 'red'
               }"
               [ngClass]="
-                (timer / (questions.length * 1 * 60)) * 100 > 20 ? '' : 'blink'
+                (timer / (questions.length * 0.5 * 60)) * 100 > 20
+                  ? ''
+                  : 'blink'
               "
             >
               {{ timer * 1000 | date : "H:mm:ss" : "UTC" }}
@@ -89,11 +77,11 @@
           <mat-card-content style="margin: auto">
             <mat-spinner
               mode="determinate"
-              [value]="(timer / (questions.length * 1 * 60)) * 100"
+              [value]="(timer / (questions.length * 0.5 * 60)) * 100"
               [color]="
-                (timer / (questions.length * 1 * 60)) * 100 > 20
+                (timer / (questions.length * 0.5 * 60)) * 100 > 20
                   ? 'primary'
-                  : 'accent'
+                  : 'warn'
               "
             ></mat-spinner>
           </mat-card-content>

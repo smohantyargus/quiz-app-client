@@ -1,5 +1,5 @@
 import { LocationStrategy } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { QuestionService } from 'src/app/services/question.service';
 
@@ -9,6 +9,11 @@ import { QuestionService } from 'src/app/services/question.service';
   styleUrls: ['./quiz-start.component.css'],
 })
 export class QuizStartComponent implements OnInit {
+  // @HostListener('contextmenu', ['$event'])
+  // onRightClick(event: any) {
+  //   event.preventDefault();
+  // }
+
   qid: any = null;
   questions: any = [];
   marksGot: any = 0;
@@ -32,7 +37,7 @@ export class QuizStartComponent implements OnInit {
         .getQustionsOfQuizForTest(this.qid)
         .subscribe((data) => {
           this.questions = data;
-          this.timer = this.questions.length * 1 * 60;
+          this.timer = this.questions.length * 0.5 * 60;
           this.questions.forEach((q: any) => {
             q['givenAnswer'] = '';
           });
@@ -57,6 +62,8 @@ export class QuizStartComponent implements OnInit {
   }
 
   evalQuiz() {
+    console.log(this.questions);
+
     this.isSubmit = true;
     this.questions.forEach((q: any) => {
       if (q.givenAnswer == q.answer) {
